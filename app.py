@@ -42,11 +42,11 @@ def _image_wc(obj, caption=None):
 left, right = st.columns([6,1])
 with left:
     def reset_to_home():
-    for k in list(st.session_state.keys()):
-        if k not in ('schema_loaded',):
-            del st.session_state[k]
-    st.session_state['product_choice'] = None
-    st.rerun()
+        for k in list(st.session_state.keys()):
+            if k not in ('schema_loaded',):
+                del st.session_state[k]
+        st.session_state['product_choice'] = None
+        st.rerun()
 
 st.sidebar.button('🏠 Anasayfa', on_click=reset_to_home)
 
