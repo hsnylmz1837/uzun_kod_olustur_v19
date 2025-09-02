@@ -423,10 +423,10 @@ def build_parts(machine_type, schema, s1, s2):
 
     return parts
 
-mk = (st.session_state.get("product_row") or {}.get("MakineTipi"))
+mk = ((st.session_state.get("product_row") or {}).get("MakineTipi")) or ""
 s1, s2 = st.session_state.get("s1"), st.session_state.get("s2")
 new_parts = build_parts(mk, schema, s1, s2) if mk else []
-st.session_state.get("product_row") or {}.get("MakineTipi")
+((st.session_state.get("product_row") or {}).get("MakineTipi")) or ""
 s1, s2 = st.session_state.get("s1"), st.session_state.get("s2")
 new_parts = build_parts(mk, schema, s1, s2) if mk else []
 
