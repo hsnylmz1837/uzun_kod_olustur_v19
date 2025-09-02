@@ -51,7 +51,7 @@ with left:
 st.sidebar.button('🏠 Anasayfa', on_click=reset_to_home)
 
 st.title("Uzun Kod Oluşturma Programı - v18.1 / Statik")
-    st.caption("Seçtikçe uzun kod otomatik oluşur.")
+st.caption("Seçtikçe uzun kod otomatik oluşur.")
 with right:
     try:
         _image_wc("data/coiltech_logo.png")
