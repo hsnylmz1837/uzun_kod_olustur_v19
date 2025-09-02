@@ -427,28 +427,28 @@ mk = (st.session_state.get("product_row") or {}.get("MakineTipi"))
 s1, s2 = st.session_state.get("s1"), st.session_state.get("s2")
 new_parts = build_parts(mk, schema, s1, s2) if mk else []
 st.session_state.get("product_row") or {}.get("MakineTipi")
-    s1, s2 = st.session_state.get("s1"), st.session_state.get("s2")
-    new_parts = build_parts(mk, schema, s1, s2) if mk else []
+s1, s2 = st.session_state.get("s1"), st.session_state.get("s2")
+new_parts = build_parts(mk, schema, s1, s2) if mk else []
 
-    old = st.session_state["long_code_parts"]
-    common=0
-    for a,b in zip(old,new_parts):
-        if a==b: common+=1
-        else: break
-    last_added=new_parts[common:]
-    st.session_state["long_code_parts"]=new_parts
-    st.session_state["last_added"]=last_added
-    st.session_state["long_code"]=" ".join(new_parts)
+old = st.session_state["long_code_parts"]
+common=0
+for a,b in zip(old,new_parts):
+    if a==b: common+=1
+    else: break
+last_added=new_parts[common:]
+st.session_state["long_code_parts"]=new_parts
+st.session_state["last_added"]=last_added
+st.session_state["long_code"]=" ".join(new_parts)
 
-    chips_html="".join([f'<span class="token{" new" if i>=common else ""}">{p}</span>' for i,p in enumerate(new_parts)])
-    st.markdown(chips_html if chips_html else '<span class="smallmuted">Kod için seçim yapın…</span>', unsafe_allow_html=True)
+chips_html="".join([f'<span class="token{" new" if i>=common else ""}">{p}</span>' for i,p in enumerate(new_parts)])
+st.markdown(chips_html if chips_html else '<span class="smallmuted">Kod için seçim yapın…</span>', unsafe_allow_html=True)
 
-    if st.session_state["long_code"]:
-        st.code(st.session_state["long_code"], language="text")
-        if last_added:
-            st.markdown(f"**➕ Son eklenen:** {' , '.join(last_added)}")
-            img=qrcode.make(st.session_state["long_code"]); buf=io.BytesIO(); img.save(buf, format="PNG")
-            st.image(buf.getvalue(), caption="QR", width=96)
-        st.download_button("Kodu TXT indir", data=st.session_state["long_code"].encode("utf-8"), file_name="uzun_kod.txt")
+if st.session_state["long_code"]:
+    st.code(st.session_state["long_code"], language="text")
+    if last_added:
+        st.markdown(f"**➕ Son eklenen:** {' , '.join(last_added)}")
+        img=qrcode.make(st.session_state["long_code"]); buf=io.BytesIO(); img.save(buf, format="PNG")
+        st.image(buf.getvalue(), caption="QR", width=96)
+    st.download_button("Kodu TXT indir", data=st.session_state["long_code"].encode("utf-8"), file_name="uzun_kod.txt")
 
-    st.markdown('</div>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
